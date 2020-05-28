@@ -1,60 +1,109 @@
 // LOGINFORM VALIDATION
 
 // BUTTON SUBMIT
-function validationlogin() {
-    console.log("login form validation ");
+// function validationlogin() {
+//     console.log("login form validation ");
    
-    var email = document.getElementById("email").value;
-    var pword = document.getElementById("password").value;
-    var lbl=document.getElementById("error");
-    // Regular Expression For Email
-    var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+//     var email = document.getElementById("email").value;
+//     var pword = document.getElementById("password").value;
+//     var lbl=document.getElementById("error");
+//     // Regular Expression For Email
+    // var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
     // Conditions
-    if ( email != '' && pword != '') 
-    {
-        if(email.match(emailReg))
-        {
-            if(pword.length>=8)
-            {
-                return true;
-            }
-            else
-            {
-                lbl.innerText="enter a strong password..";
-                lbl.style.color="brown";
-                lbl.style.border="solid brown 3px";
-                return false;
-            }
 
-        }
-        else
-        {
-            lbl.innerText="enter a vaild email..";
-            lbl.style.color="brown";
-            lbl.style.border="solid brown 3px";
-            return false;
-        }
+  //   if ( email != '' && pword != '') 
+  //   {
+     
+  //       if(email.match(emailReg))
+  //       {
+  //           if(pword.length>=8)
+  //           {
+              
+  //             alert("CONGRATULATIONS..");
+  //               return true;
+  //           }
+  //           else
+  //           {
+  //               lbl.innerText="ENTER A STRONG PASSWORD";
+  //               lbl.style.color="brown";
+  //               lbl.style.border="solid brown 3px";
+                
+  //               return false;
+                
+  //           }
 
+  //       }
+  //       else
+  //       {
+  //           lbl.innerText="ENTER A VALID EMAIL.";
+  //           lbl.style.color="brown";
+  //           lbl.style.border="solid brown 3px";
+  //           return false;
+  //       }
+
+  //    }
+  //   else
+  //   {
+  //       lbl.innerText="ALL FIELDS MUST BE FILLED";
+  //       lbl.style.color="brown";
+  //       lbl.style.border="solid brown 3px";
+  //       return false;
+  //   }
+  // }
+function validationlogin()
+{
+  console.log("login form validation ");
+   
+  var email = document.getElementById("email").value;
+  var pword = document.getElementById("password").value;
+ 
+  var err="";
+  if(mail(email))
+  {
+  }
+  if(pord(pword))
+  {
+
+  }
+  return false;
+}
+function mail(email)
+{
+  var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+  var lbl=document.getElementsByClassName("error");
+  if(email=="" ||email.match(emailReg))
+  {
+    err="";
+    lbl[0].innerHTML=err;
+    return  true;
+  }
+  else{
+    err="CHECK YOUR EMAIL";
+    lbl[0].innerHTML=err;
+    return false;
+
+  }
+}
+function pord(pword){
+  var lbl=document.getElementsByClassName("error");
+  if(pword=""||pword.length>=7)
+  {
+    err="";
+    lbl[1].innerHTML=err;
+    return true;
     }
-    else
-    {
-        lbl.innerText="All Fields Must be filled..";
-        lbl.style.color="brown";
-        lbl.style.border="solid brown 3px";
-        return false;
+    else{
+      err="PASSWORD MUST BE VALID AND STRONG...!";
+      lbl[1].innerHTML=err;
+      return false;
     }
 }
 
-//BUTTON CANCEL
-    function reset()
-    {
-     document.getElementById("error").value="";
-    }
 //LOGIN FORM VALIDATION ENDS
 //signup form validation
 function signupvalidation()
 {
-    console.log("signup form validation ");
+console.log("signup form validation ");
 var fname=document.getElementById("boxno1").value;
 var lname=document.getElementById("boxno2").value;
 var mail=document.getElementById("boxno3").value;
@@ -126,7 +175,7 @@ function FirstName(fname) {
     var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/; 
     var atpos = mail.indexOf("@");
     var dotpos = mail.lastIndexOf(".");
-    if(mail.match(mailformat))
+    if(mail==""|| mail.match(mailformat))
     {
       text="";
       message[2].innerHTML = text;
@@ -143,7 +192,7 @@ function FirstName(fname) {
    function Age(age){
     var message = document.getElementsByClassName("error-message");
     var  no = /^[0-9]+/;
-    if ( (age.match(no)) && age>=1 && age<=100) {
+    if ( (age=="" || (age.match(no)) && age>=1 && age<=100) ){
       text="";
       message[3].innerHTML = text;
       return true;
@@ -173,23 +222,7 @@ function FirstName(fname) {
     }
   }
   
-  // validation Address
-// function Address(addr){
-//   var message = document.getElementsByClassName("error-message");
-//   // var ads=/^[a-zA-Z0-9\,'-]*$/;
-//   if(addr=="")
-//   { 
-//      text="";
-//   message[5].innerHTML = text;
-//     return true;
-//   }
-//   else{
-    
-//     text="Please Rewrite your Address";
-//     message[5].innerHTML = text;
-//     return false;
-//   }
-// }
+
 
   // country input validation
   function  Country(country) {
@@ -211,8 +244,28 @@ function FirstName(fname) {
 function Password(password) {
     var message = document.getElementsByClassName("error-message");
     var illegalChars = /[\W_]/; // allow only letters and numbers
-    if (illegalChars.test(password)) { 
-      text="Password contains illegal characters";
+    // if (illegalChars.test(password)) { 
+    //   text="Password contains illegal characters";
+    //   message[6].innerHTML = text;
+    //   return false;
+    // }
+    // else if ( (password.search(/[0-9]+/)==-1) ) {
+    //   text="Password should contain at least one number";
+    //   message[6].innerHTML = text;
+    //   return false;
+    // }
+    // else  {
+    //   text="";
+    //   message[6].innerHTML = text;
+    //   return true;
+    // }
+    if(password=="")
+    {
+
+    }
+    else if(illegalChars.test(password))
+    {
+    text="Password contains illegal characters";
       message[6].innerHTML = text;
       return false;
     }
@@ -221,7 +274,7 @@ function Password(password) {
       message[6].innerHTML = text;
       return false;
     }
-    else {
+    else  {
       text="";
       message[6].innerHTML = text;
       return true;
@@ -229,6 +282,3 @@ function Password(password) {
   }
    
  
- function rset(){
-   text="";
- }
